@@ -2,13 +2,13 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 var scrape = function (cb) {
-    request("https://www.nytimes.com", function (error, response, body) {
+    request("https://gawker.com/tag/gossip", function (error, response, body) {
         var $ = cheerio.load(body);
         var articles = [];
-        $(".theme-summary").each(function (i, element) {
+        $("article").each(function (i, element) {
 
-            var header = $(this).children(".story-heading").text().trim();
-            var summary = $(this).children(".summary").text().trim();
+            var header = $(this).children("h1.headline").text().trim();
+            var summary = $(this).children(".post-excerpt").text().trim();
 
             if (header && summary) {
 

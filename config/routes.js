@@ -31,7 +31,7 @@ module.exports = function(router){
     router.get("/api/headlines", function(request,response){
         var query={};
         if(request.query.saved){
-            query=req.query;
+            query=request.query;
         }
         headlineController.get(query, function(data){
             response.json(data);
@@ -49,7 +49,7 @@ module.exports = function(router){
     })
 
     router.patch("/api/headlines", function(request,response){
-        headlineController.update(req.body, function(error,data){
+        headlineController.update(request.body, function(error,data){
             response.json(data);
         });
     });
@@ -58,7 +58,7 @@ module.exports = function(router){
     router.get("/api/notes/:headline_id?", function(request,response){
         var query = {};
         if(request.params.headline_id){
-            query._id = req.params.headline_id;
+            query._id = request.params.headline_id;
         }
 
         notesController.get(query, function(error,data){
@@ -68,7 +68,7 @@ module.exports = function(router){
 
     router.delete("/api/notes/:id", function(request,response){
         var query = {};
-        query._id = req.params.id;
+        query._id = request.params.id;
         notesController.delete(query, function (error, data){
             response.json(data);
         })
@@ -76,7 +76,7 @@ module.exports = function(router){
 
 
     router.post("/api/notes", function(request,response){
-        notesController.save(req.body, function(data){
+        notesController.save(request.body, function(data){
             response.json(data);
         })
     })

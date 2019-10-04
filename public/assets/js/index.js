@@ -7,8 +7,6 @@ $(document).on("click", ".scrape-new", handleArticleScrape);
 
 
 
-initiatePage();
-
 function initiatePage(){
 
     articleContainer.empty();

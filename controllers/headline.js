@@ -22,10 +22,10 @@ module.exports = {
 
     },
     delete: function (query, callback) {
-        Articles.remove(query, callback);
+        Headline.remove(query, callback);
     },
     get: function (query, callback) {
-        Articles.find(query)
+        Headline.find(query)
             .sort({
                 _id: -1
             })
@@ -35,7 +35,7 @@ module.exports = {
 
     },
     update: function(query,callback){
-        Articles.update({_id:query._id}, {
+        Headline.update({_id:query._id}, {
             $set:query
         },{},callback);
     }
