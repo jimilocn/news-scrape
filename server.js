@@ -4,12 +4,15 @@ var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var axios = require("axios");
 var cheerio = require("cheerio");
-var db = require("./models");
+// var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
+
+var router=express.Router();
+require("./config/routes")(router);
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
@@ -18,11 +21,12 @@ app.set("view engine", "handlebars");
 app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({
-    extended: true
+    extended: false
 }));
+app.use(router);
 app.use(express.json());
 // Make public a static folder
-app.use(express.static("public"));
+app.use(express.static(__dirname+"public"));
 
 
 // Connect to the Mongo DB
